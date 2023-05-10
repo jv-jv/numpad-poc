@@ -16,6 +16,17 @@ const ActionButton = ({
     setIsSelected(false);
   }, [wasSubmitted]);
 
+  useEffect(() => {
+    if ((document.querySelector("body > div:nth-child(3)") as any) !== null) {
+      const interval = setTimeout(() => {
+        (document.querySelector("body > div:nth-child(3)") as any).remove();
+      }, 100);
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, []);
+
   return (
     <>
       <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr" }}>

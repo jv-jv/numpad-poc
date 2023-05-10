@@ -23,7 +23,7 @@ const ActionButton = ({
           // variant={isSelected ? 'contained' : 'outlined'}
           // cssClass="e-danger"
           // cssClass={isSelected ? 'e-outline' : 'e-flat'}
-          cssClass={isSelected ? "e-outline" : "e-flat"}
+          cssClass={isSelected ? "e-outline-custom" : "e-flat-custom"}
           style={btnStyle}
           onClick={() => {
             setAction(title);

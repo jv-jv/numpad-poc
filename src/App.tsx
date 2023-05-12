@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
+import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import "./App.css";
 import Numpad from "./Numpad/Numpad";
 
@@ -33,7 +34,7 @@ const ActionButton = ({
         <ButtonComponent
           // variant={isSelected ? 'contained' : 'outlined'}
           // cssClass="e-danger"
-          // cssClass={isSelected ? 'e-outline' : 'e-flat'}
+          // cssClass={isSelected ? "e-outline" : "e-flat"}
           cssClass={isSelected ? "e-outline-custom" : "e-flat-custom"}
           style={btnStyle}
           onClick={() => {
@@ -88,6 +89,14 @@ function App() {
     setCount("");
   };
 
+  const switchSign = () => {
+    if (Number(count) > 0) {
+      setCount("-" + count);
+    } else {
+      setCount(count.replace("-", ""));
+    }
+  };
+
   const onSubmit = ({ action }: any) => {
     if (!action) return;
     console.log(action);
@@ -109,12 +118,32 @@ function App() {
           onClear={onClear}
           btnStyle={btnStyle}
           onSubmit={() => onSubmit({ action })}
+          switchSign={switchSign}
         />
 
         <div
           style={{ display: "flex", flexDirection: "column", width: "200px" }}
         >
           <h4>values</h4>
+
+          <div style={{ display: "flex" }}>
+            <ButtonComponent
+              style={{ ...btnStyle, width: "100%" }}
+              onClick={() => {
+                setCount((prev) => String(Number(prev) + 1));
+              }}
+            >
+              +
+            </ButtonComponent>
+            <ButtonComponent
+              style={{ ...btnStyle, width: "100%" }}
+              onClick={() => {
+                setCount((prev) => String(Number(prev) - 1));
+              }}
+            >
+              -
+            </ButtonComponent>
+          </div>
 
           {["pick", "waste", "ullage", "inbound"].map((item) => (
             <ActionButton
@@ -125,6 +154,17 @@ function App() {
               wasSubmitted={wasSubmitted}
             />
           ))}
+
+          {(action === "waste" || action === "ullage") && (
+            <div
+            // style={{ border: "1px solid grey" }}
+            >
+              <DropDownListComponent
+                id="test"
+                dataSource={["Broken", "Dirty"]}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

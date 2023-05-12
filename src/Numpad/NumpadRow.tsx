@@ -8,11 +8,7 @@ const NumBtn = ({ value, onClick }: any) => {
   };
 
   return (
-    <ButtonComponent
-      // variant="contained"
-      style={btnStyle}
-      onClick={onClick}
-    >
+    <ButtonComponent style={btnStyle} onClick={onClick}>
       {value}
     </ButtonComponent>
   );
